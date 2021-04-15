@@ -1,6 +1,6 @@
 # GovNaB ToDo Management App
 
-This app is created to help people manage their tasks. They can set the deadline so that the task gover doesn't have to wait for his/her task to be completed. This app is highly dynamic and uses the power of `Python`.
+This app is created to help people manage their tasks. They can set the deadline so that the task giver doesn't have to wait for his/her task to be completed. This app is highly dynamic and uses the power of `Python`.
 
 ## Working
 
