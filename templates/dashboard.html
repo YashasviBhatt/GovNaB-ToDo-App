@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block todo %}
+    <div class="navigation_bar">
+        <div class="nav_content">
+            {{ login_details.name }}
+        </div>
+    </div>
+    <div class="dboard-box" style="margin-top: -3%;">
+        <form action="/add_todo" method="POST">
+            <center><h1>Your ToDo List</h1></center>
+            <div class="add-task">
+                <div class="textbox">
+                    <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                    <input type="text" placeholder="Task Title" name="add_task" onclick="clearBox('error')" required>
+                </div>
+                <div class="textbox">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    <input type="date" placeholder="Select Completion Date" name="completion_date" required>
+                </div>
+                <div class="textbox">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <textarea class="task-desc" name="description"></textarea>
+                </div>
+                <input class="btn" type="submit" name="" value="Add Task">
+            </div>
+        </form>
+        <div class="tasks">
+            <div class="task-list">
+                <ul>
+                    {% if tasks[0] %}
+                        {% for task in tasks %}
+                            {% if task[3] == 'Not Yet Completed' %}
+                                <li class="dropdown">
+                                    <button class="dropbtn {% if task[1] < date %} missed {% elif task[1] == date %} warning {% endif %}">{{ task[0] }}</button>
+                                    <div class="dropdown-content">
+                                        <span class="decrease-margin {% if task[1] < date %} missed {% elif task[1] == date %} warning {% endif %}"><strong style="color: black;">Completion Date :</strong> {{ task[1] }}</span>
+                                        <span class="decrease-margin"><strong>Description :</strong> {{ task[2] }}</span>
+                                        <span><strong>Completed On :</strong> {{ task[3] }}</span>
+                                        <a href="{{ url_for('delete_todo', title=task[0]) }}"><button class="dlt_btn">Delete This</button></a>
+                                        <a href="{{ url_for('complete_todo', title=task[0]) }}"><button class="cmplt_btn">Mark as Completed</button></a>
+                                    </div>
+                                </li>
+                                <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for task in tasks %}
+                            {% if task[3] != 'Not Yet Completed' %}
+                                <li class="dropdown">
+                                    <button class="dropbtn completed">{{ task[0] }}</button>
+                                    <div class="dropdown-content">
+                                        <span class="decrease-margin"><strong>Description :</strong> {{ task[2] }}</span>
+                                        <span><strong>Completed On :</strong> {{ task[3] }}</span>
+                                        <a href="{{ url_for('delete_todo', title=task[0]) }}"><button class="dlt_btn">Delete This</button></a>
+                                    </div>
+                                </li>
+                                <br>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <li class="dropdown">You don't have any ToDos</li>
+                        <br><br>
+                        <li class="dropdown">Try Adding Some</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="login-box" style="margin-top: 30%; width: 15%;">
+            <a href="/logout/"><button class="btn" style="background-color: #4caf4c;">Logout</button></a>
+        </div>
+        <div id="error" style="margin-top: 40%;">
+            {% if not positive_task %}
+                <div style="font: 10px !important; color: red;" id="error">{{ task_value }}</div>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        function clearBox(elementID)
+        {
+            document.getElementById(elementID).innerHTML = "";
+        }
+    </script>
+{% endblock %}

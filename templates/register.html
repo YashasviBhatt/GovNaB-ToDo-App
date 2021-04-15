@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block todo %}
+    <form action="/register/" method="POST">
+        <div class="login-box" style="margin-top: -4%;">
+            <h1 style="margin-top: 35%;">Register</h1>
+            <div class="textbox">
+                <i class="fa fa-address-card" aria-hidden="true"></i>
+                <input type="text" placeholder="Name" name="name" onclick="clearBox('error')" required>
+            </div>
+            <div class="textbox">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <input type="email" placeholder="Email" name="email" onclick="clearBox('error')" required>
+            </div>
+            <div class="textbox">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <input type="text" placeholder="Username" name="username" onclick="clearBox('error')" required>
+            </div>
+            <div class="textbox">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input type="password" placeholder="Password" name="password" onclick="clearBox('error')" autocomplete="off" required>
+            </div>
+            <div class="textbox">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input type="password" placeholder="Re-Type Password" name="repassword" onclick="clearBox('error')" autocomplete="off" required>
+            </div>
+            <input class="btn" type="submit" name="" value="Sign Up">
+            {% if not positive %}
+                <div style="font: 10px imp !important; color: red;" id="error">{{ value }}</div>
+            {% endif %}
+            <div style="margin-top: 5px;">Already Registered? <a href="/login/" class="log-reg">Login</div>
+        </div>
+    </form>
+    <div class="login-box" style="margin-top: 19%; width: 15%;">
+        <a href="/"><button class="btn" style="background-color: #4caf4c;">Back to Home</button></a>
+    </div>
+    <script>
+        function clearBox(elementID)
+        {
+            document.getElementById(elementID).innerHTML = "";
+        }
+    </script>
+{% endblock %}
