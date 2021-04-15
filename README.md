@@ -39,8 +39,6 @@ If the date of completion and current date are same i.e user have less than a da
 
 The Project uses `Python-Flask` for all the dynamic rendering and webpages rendering, `MongoDB` for data collection and `Python` for logical functionality. Apart from this, webpages are designed with `HTML`, `CSS` and `JavaScript`.
 
-This App was deployed on `Heroku`, you can access it from [here](https://govnab-todo-app.herokuapp.com/).
-
 ## Execution
 
 - Since, the credentials used while prodution were secret and since source code is shared so original credentials were removed and thus the user will have to keep their MongoDB credentials with them.
